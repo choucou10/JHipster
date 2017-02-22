@@ -1,0 +1,29 @@
+
+<div *ngIf="auteur">
+    <h2><span jhiTranslate="socleJHipsterApp.auteur.detail.title">Auteur</span> {{auteur.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row">
+        <dt><span jhiTranslate="socleJHipsterApp.auteur.nom">Nom</span></dt>
+        <dd>
+            <span>{{auteur.nom}}</span>
+        </dd>
+        <dt><span jhiTranslate="socleJHipsterApp.auteur.dateNaissance">Date Naissance</span></dt>
+        <dd>
+            <span>{{auteur.dateNaissance | date:'mediumDate'}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'auteur/'+ auteur.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

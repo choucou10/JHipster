@@ -1,0 +1,90 @@
+
+
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+        <h4 class="modal-title" id="myLivreLabel" jhiTranslate="socleJHipsterApp.livre.home.createOrEditLabel">Create or edit a Livre</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!livre.id">
+            <label for="id" jhiTranslate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="livre.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="socleJHipsterApp.livre.titre" for="field_titre">Titre</label>
+            <input type="text" class="form-control" name="titre" id="field_titre"
+                [(ngModel)]="livre.titre"
+            required />
+            <div [hidden]="!(editForm.controls.titre?.dirty && editForm.controls.titre?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.titre?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="socleJHipsterApp.livre.description" for="field_description">Description</label>
+            <input type="text" class="form-control" name="description" id="field_description"
+                [(ngModel)]="livre.description"
+            required />
+            <div [hidden]="!(editForm.controls.description?.dirty && editForm.controls.description?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.description?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="socleJHipsterApp.livre.datePublication" for="field_datePublication">Date Publication</label>
+            <div class="input-group">
+                <input id="field_datePublication" type="text" class="form-control" name="datePublication" ngbDatepicker  #datePublicationDp="ngbDatepicker" [(ngModel)]="livre.datePublication"
+                required/>
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" (click)="datePublicationDp.open()"><i class="fa fa-calendar"></i></button>
+                </span>
+            </div>
+            <div [hidden]="!(editForm.controls.datePublication?.dirty && editForm.controls.datePublication?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.datePublication?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="socleJHipsterApp.livre.prix" for="field_prix">Prix</label>
+            <input type="number" class="form-control" name="prix" id="field_prix"
+                [(ngModel)]="livre.prix"
+            required />
+            <div [hidden]="!(editForm.controls.prix?.dirty && editForm.controls.prix?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.prix?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.prix?.errors?.number" jhiTranslate="entity.validation.number">
+                    This field should be a number.
+                </small>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label jhiTranslate="socleJHipsterApp.livre.auteur" for="field_auteur">Auteur</label>
+            <select class="form-control" id="field_auteur" name="auteur" [(ngModel)]="livre.auteur" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="auteurOption.id === livre.auteur?.id ? livre.auteur : auteurOption" *ngFor="let auteurOption of auteurs; trackBy: trackAuteurById">{{auteurOption.nom}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

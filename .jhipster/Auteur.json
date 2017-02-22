@@ -1,0 +1,32 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "livre",
+            "otherEntityName": "livre",
+            "relationshipType": "one-to-many",
+            "otherEntityRelationshipName": "auteur"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "nom",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "dateNaissance",
+            "fieldType": "LocalDate",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "changelogDate": "20170221190808",
+    "dto": "no",
+    "service": "no",
+    "entityTableName": "auteur",
+    "pagination": "infinite-scroll"
+}
