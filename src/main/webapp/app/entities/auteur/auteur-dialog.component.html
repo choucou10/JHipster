@@ -1,0 +1,55 @@
+
+
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+        <h4 class="modal-title" id="myAuteurLabel" jhiTranslate="socleJHipsterApp.auteur.home.createOrEditLabel">Create or edit a Auteur</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!auteur.id">
+            <label for="id" jhiTranslate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="auteur.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="socleJHipsterApp.auteur.nom" for="field_nom">Nom</label>
+            <input type="text" class="form-control" name="nom" id="field_nom"
+                [(ngModel)]="auteur.nom"
+            required />
+            <div [hidden]="!(editForm.controls.nom?.dirty && editForm.controls.nom?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.nom?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="socleJHipsterApp.auteur.dateNaissance" for="field_dateNaissance">Date Naissance</label>
+            <div class="input-group">
+                <input id="field_dateNaissance" type="text" class="form-control" name="dateNaissance" ngbDatepicker  #dateNaissanceDp="ngbDatepicker" [(ngModel)]="auteur.dateNaissance"
+                required/>
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" (click)="dateNaissanceDp.open()"><i class="fa fa-calendar"></i></button>
+                </span>
+            </div>
+            <div [hidden]="!(editForm.controls.dateNaissance?.dirty && editForm.controls.dateNaissance?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.dateNaissance?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

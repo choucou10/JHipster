@@ -1,0 +1,43 @@
+
+<div *ngIf="livre">
+    <h2><span jhiTranslate="socleJHipsterApp.livre.detail.title">Livre</span> {{livre.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row">
+        <dt><span jhiTranslate="socleJHipsterApp.livre.titre">Titre</span></dt>
+        <dd>
+            <span>{{livre.titre}}</span>
+        </dd>
+        <dt><span jhiTranslate="socleJHipsterApp.livre.description">Description</span></dt>
+        <dd>
+            <span>{{livre.description}}</span>
+        </dd>
+        <dt><span jhiTranslate="socleJHipsterApp.livre.datePublication">Date Publication</span></dt>
+        <dd>
+            <span>{{livre.datePublication | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span jhiTranslate="socleJHipsterApp.livre.prix">Prix</span></dt>
+        <dd>
+            <span>{{livre.prix}}</span>
+        </dd>
+        <dt><span jhiTranslate="socleJHipsterApp.livre.auteur">Auteur</span></dt>
+        <dd>
+            <div *ngIf="livre.auteur">
+                <a [routerLink]="['auteur', livre.auteur?.id]">{{livre.auteur?.nom}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'livre/'+ livre.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

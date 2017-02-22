@@ -1,0 +1,69 @@
+<div>
+    <h2><span jhiTranslate="socleJHipsterApp.livre.home.title">Livres</span>
+        <button class="btn btn-primary float-xs-right create-livre" [routerLink]="['/', { outlets: { popup: ['livre-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span  jhiTranslate="socleJHipsterApp.livre.home.createLabel">
+            Create new Livre
+            </span>
+        </button></h2>
+    <jhi-alert></jhi-alert>
+
+    <div class="container-fluid">
+        <div class="row">
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="livres">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="reset.bind(this)">
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="titre"><span jhiTranslate="socleJHipsterApp.livre.titre">Titre</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="description"><span jhiTranslate="socleJHipsterApp.livre.description">Description</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="datePublication"><span jhiTranslate="socleJHipsterApp.livre.datePublication">Date Publication</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="prix"><span jhiTranslate="socleJHipsterApp.livre.prix">Prix</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="auteur.nom"><span jhiTranslate="socleJHipsterApp.livre.auteur">Auteur</span> <span class="fa fa-sort"></span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
+            <tr *ngFor="let livre of livres ;trackBy: trackId">
+                <td><a [routerLink]="['../livre', livre.id ]">{{livre.id}}</a></td>
+                <td>{{livre.titre}}</td>
+                <td>{{livre.description}}</td>
+                <td>{{livre.datePublication | date:'mediumDate'}}</td>
+                <td>{{livre.prix}}</td>
+                <td>
+                    <div *ngIf="livre.auteur">
+                        <a [routerLink]="['../auteur', livre.auteur?.id ]" >{{livre.auteur?.nom}}</a>
+                    </div>
+                </td>
+                <td class="text-xs-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../livre', livre.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="hidden-md-down" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'livre/'+ livre.id + '/edit'} }]"
+                                replaceUrl="true"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="hidden-md-down" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'livre/'+ livre.id + '/delete'} }]"
+                                replaceUrl="true"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="hidden-md-down" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

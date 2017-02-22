@@ -1,0 +1,41 @@
+{
+  "generator-jhipster": {
+    "jhipsterVersion": "4.0.2",
+    "baseName": "SocleJHipster",
+    "packageName": "com.sifast",
+    "packageFolder": "com/sifast",
+    "serverPort": "8080",
+    "authenticationType": "session",
+    "hibernateCache": "ehcache",
+    "clusteredHttpSession": false,
+    "websocket": false,
+    "databaseType": "sql",
+    "devDatabaseType": "mysql",
+    "prodDatabaseType": "mysql",
+    "searchEngine": false,
+    "messageBroker": false,
+    "buildTool": "maven",
+    "enableSocialSignIn": false,
+    "rememberMeKey": "8da0c1e036cb3820d7f022d365482c71b322128d",
+    "useSass": false,
+    "clientPackageManager": "yarn",
+    "applicationType": "monolith",
+    "testFrameworks": [],
+    "jhiPrefix": "jhi",
+    "enableTranslation": true,
+    "nativeLanguage": "fr",
+    "languages": [
+      "fr",
+      "en",
+      "de"
+    ],
+    "serviceDiscoveryType": false,
+    "appsFolders": [
+      "SocleJHipster"
+    ],
+    "directoryPath": "../",
+    "monitoring": "no",
+    "jwtSecretKey": "abc172348cb699a691076f78f289c7e7809b237e",
+    "clientFramework": "angular2"
+  }
+}
